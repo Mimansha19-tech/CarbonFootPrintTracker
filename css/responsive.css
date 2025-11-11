@@ -1,0 +1,8 @@
+@media (max-width:720px) {
+    .container {
+        padding: 12px
+    }
+    .main-nav {
+        display: none
+    }
+}

@@ -1,0 +1,78 @@
+/* Basic layout and utilities */
+
+:root {
+    --accent: #2b9d3b;
+    --bg: #f7f7f8;
+    --text: #222
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: Segoe UI, Roboto, Arial, sans-serif;
+    color: var(--text);
+    margin: 0;
+    background: var(--bg)
+}
+
+.container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 20px
+}
+
+.site-header {
+    background: #fff;
+    border-bottom: 1px solid #e6e6e6
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.brand {
+    margin: 0;
+    padding: 12px 0;
+    font-size: 1.1rem
+}
+
+.main-nav a {
+    margin-left: 12px;
+    color: #333;
+    text-decoration: none
+}
+
+.hero {
+    padding: 40px 0
+}
+
+.btn {
+    background: var(--accent);
+    color: #fff;
+    padding: 10px 14px;
+    border-radius: 6px;
+    text-decoration: none
+}
+
+.auth-page form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px
+}
+
+.auth-page label {
+    display: flex;
+    flex-direction: column;
+    font-size: 0.9rem
+}
+
+.site-footer {
+    padding: 16px 0;
+    text-align: center;
+    color: #666
+}

@@ -57,3 +57,17 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Run locally
+
+You can serve the static files with a simple static server. Two easy options:
+
+1) Using npm (recommended when developing):
+
+	npm install --global http-server
+	npm start
+
+2) Or open `index.html` directly in your browser (for quick preview).
+
+The `package.json` includes a small `start` script that uses `http-server` via npx.
+
