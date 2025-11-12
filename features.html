@@ -7,6 +7,82 @@
     <title>Features — AI Carbon Footprint Tracker</title>
     <link rel="stylesheet" href="css/style.css" />
 </head>
+<style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      background-color: #f7fdf9;
+      color: #222;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: #fff;
+      padding: 1rem 2rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #1b5e20;
+      margin-bottom: 2rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background-color: #fff;
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      color: #388e3c;
+      margin-bottom: 10px;
+    }
+
+    .feature-card h3 {
+      margin: 0.5rem 0;
+      color: #2e7d32;
+    }
+
+    .feature-card p {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: #444;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      background-color: #2e7d32;
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      header, footer {
+        text-align: center;
+      }
+    }
+  </style>
 
 <body>
     <header class="site-header">
@@ -22,5 +98,67 @@
     </main>
     <script src="js/main.js"></script>
 </body>
+<header>
+    <h2>EcoTracker Features</h2>
+  </header>
+
+  <div class="container">
+    <h1>What Makes EcoTracker Special 🌿</h1>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Personalised Tracking</h3>
+        <p>Understand your unique environmental impact with real-time insights into your daily activities like transport, energy use, and food habits.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Driven Insights</h3>
+        <p>Our AI analyses your lifestyle data to calculate your carbon footprint and provides intelligent, actionable suggestions to reduce it.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Visualised Data</h3>
+        <p>Dynamic charts and graphs show your weekly and monthly footprint trends, helping you see progress and identify improvement areas.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🏅</div>
+        <h3>Gamified Challenges</h3>
+        <p>Earn badges and rewards for reducing emissions and completing eco-goals. Compete with friends and make sustainability fun!</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">💬</div>
+        <h3>Community Engagement</h3>
+        <p>Connect with like-minded users in the EcoTracker community, share tips, and celebrate achievements for collective impact.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛒</div>
+        <h3>Carbon Offset Marketplace</h3>
+        <p>Support verified green initiatives and offset your remaining emissions by donating to tree-planting and renewable energy projects.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>Geo-based Tips</h3>
+        <p>Discover nearby recycling centers, eco-stores, and renewable options based on your location to make green choices more accessible.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>AI Chatbot Assistant</h3>
+        <p>Ask your Eco-Assistant for tips like “How can I reduce my carbon footprint at home?” and get instant, AI-powered answers.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 EcoTracker | Innovating Climate Action 🌱</p>
+  </footer>
+</body>
+</html>
 
 </html>
