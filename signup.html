@@ -1,25 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign up — AI Carbon Footprint Tracker</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | AI in Climate Change</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-green: #2a9d8f;
+            --dark-blue: #264653;
+            --accent-yellow: #e9c46a;
+            --light-grey: #f4f7f6;
+            --text-dark: #333;
+            --text-light: #ffffff;
+            --border-color: #ddd;
+            --error-red: #e76f51;
+            --success-green: #2a9d8f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-grey);
+            color: var(--text-dark);
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .signup-container {
+            display: flex;
+            width: 100%;
+            max-width: 950px;
+            margin: 20px;
+            background: var(--text-light);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* --- 1. Info Section (Left) --- */
+        .info-section {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-blue));
+            color: var(--text-light);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .info-section ul {
+            list-style: none;
+        }
+
+        .info-section ul li {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-section ul li::before {
+            content: '✔';
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        /* --- 2. Form Section (Right) --- */
+        .form-section {
+            flex: 1;
+            padding: 50px 40px;
+        }
+
+        .form-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* --- Interactive Styles --- */
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+        }
+
+        .form-group input.invalid {
+            border-color: var(--error-red);
+        }
+
+        .form-group input.valid {
+            border-color: var(--success-green);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.8rem;
+            display: none;
+            /* Hidden by default */
+            margin-top: 5px;
+        }
+
+        /* UPDATED: Styles for the SVG icon */
+        .password-toggle {
+            position: absolute;
+            top: 40px;
+            right: 12px;
+            cursor: pointer;
+            user-select: none;
+            color: #888;
+            width: 20px;
+            height: 20px;
+        }
+        .password-toggle:hover {
+            color: #333;
+        }
+        /* End of update */
+
+
+        .password-strength {
+            height: 10px;
+            background: var(--border-color);
+            border-radius: 5px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--error-red);
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .signup-button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, opacity 0.3s ease;
+        }
+
+        .signup-button:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .signup-button:active {
+            transform: scale(0.99);
+        }
+
+        /* Disabled button state */
+        .signup-button:disabled {
+            background-color: #999;
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer-links a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .signup-container {
+                flex-direction: column;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .info-section,
+            .form-section {
+                padding: 40px 25px;
+            }
+
+            .info-section h1 {
+                font-size: 2rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .password-toggle {
+                top: 38px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <main class="container auth-page">
-        <h1>Create account</h1>
-        <form id="signupForm">
-            <label>Name<input type="text" id="name" required></label>
-            <label>Email<input type="email" id="email" required></label>
-            <label>Password<input type="password" id="password" required></label>
-            <button type="submit">Sign up</button>
-        </form>
-        <p>Already have an account? <a href="login.html">Log in</a></p>
-    </main>
-    <script src="js/auth.js"></script>
+
+    <div class="signup-container">
+
+        <div class="info-section">
+            <h1>Harnessing AI to Combat Climate Change</h1>
+            <p>Join our community of innovators, researchers, and policymakers dedicated to finding sustainable
+                solutions for our planet.</p>
+            <ul>
+                <li>Access cutting-edge research</li>
+                <li>Collaborate on new projects</li>
+                <li>Network with industry experts</li>
+                <li>Be part of the solution</li>
+            </ul>
+        </div>
+
+        <div class="form-section">
+            <h2>Create Your Account</h2>
+
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="full-name">Full Name</label>
+                    <input type="text" id="full-name" name="full-name">
+                    <span class="error-message" id="name-error">Name is required.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Work Email</label>
+                    <input type="email" id="email" name="email">
+                    <span class="error-message" id="email-error">Please enter a valid email.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    
+                    <!-- UPDATED: This span now holds the SVG icon -->
+                    <span class="password-toggle" id="toggle-password">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px; height:20px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                    <!-- End of update -->
+
+                    <span class="error-message" id="password-error">Password must be at least 8 characters.</span>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strength-bar"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password">
+
+                    <!-- UPDATED: This span now holds the SVG icon -->
+                    <span class="password-toggle" id="toggle-confirm-password">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px; height:20px;">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </span>
+                    <!-- End of update -->
+                    
+                    <span class="error-message" id="confirm-password-error">Passwords do not match.</span>
+                </div>
+
+                <button type="submit" id="signup-button" class="signup-button" disabled>Sign Up Now</button>
+            </form>
+
+            <div class="footer-links">
+                <!-- UPDATED: This link now points to login.html -->
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Form Element Selection ---
+            const signupForm = document.getElementById('signup-form');
+            const signupButton = document.getElementById('signup-button');
+
+            const nameInput = document.getElementById('full-name');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            const confirmPasswordError = document.getElementById('confirm-password-error');
+
+            const strengthBar = document.getElementById('strength-bar');
+
+            const togglePassword = document.getElementById('toggle-password');
+            const toggleConfirmPassword = document.getElementById('toggle-confirm-password');
+
+            // --- Validation State ---
+            let isNameValid = false;
+            let isEmailValid = false;
+            let isPasswordValid = false;
+            let isConfirmPasswordValid = false;
+            
+            // --- UPDATED: Helper: Toggle Password Visibility ---
+            // This is the SVG code for the "open eye" icon
+            const eyeIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px; height:20px;">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>`;
+            
+            // This is the SVG code for the "slashed eye" icon
+            const eyeSlashIcon = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:20px; height:20px;">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+                                </svg>`;
+
+            function addPasswordToggle(toggleEl, inputEl) {
+                toggleEl.addEventListener('click', () => {
+                    const type = inputEl.getAttribute('type') === 'password' ? 'text' : 'password';
+                    inputEl.setAttribute('type', type);
+                    toggleEl.innerHTML = type === 'password' ? eyeIcon : eyeSlashIcon;
+                });
+            }
+            addPasswordToggle(togglePassword, passwordInput);
+            addPasswordToggle(toggleConfirmPassword, confirmPasswordInput);
+            // --- End of update ---
+
+
+            // --- Helper: Update Field State (Valid/Invalid) ---
+            function updateFieldState(inputEl, errorEl, isValid, message = '') {
+                if (isValid) {
+                    inputEl.classList.remove('invalid');
+                    inputEl.classList.add('valid');
+                    errorEl.style.display = 'none';
+                } else {
+                    inputEl.classList.remove('valid');
+                    inputEl.classList.add('invalid');
+                    errorEl.textContent = message;
+                    errorEl.style.display = 'block';
+                }
+            }
+
+            // --- Helper: Check Form Validity & Enable Button ---
+            function checkFormValidity() {
+                if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+                    signupButton.disabled = false;
+                } else {
+                    signupButton.disabled = true;
+                }
+            }
+
+            // --- Validation Logic ---
+
+            nameInput.addEventListener('input', () => {
+                if (nameInput.value.trim().length > 1) {
+                    isNameValid = true;
+                    updateFieldState(nameInput, nameError, true);
+                } else {
+                    isNameValid = false;
+                    updateFieldState(nameInput, nameError, false, 'Name is required.');
+                }
+                checkFormValidity();
+            });
+
+            emailInput.addEventListener('input', () => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(emailInput.value)) {
+                    isEmailValid = true;
+                    updateFieldState(emailInput, emailError, true);
+                } else {
+                    isEmailValid = false;
+                    updateFieldState(emailInput, emailError, false, 'Please enter a valid email.');
+                }
+                checkFormValidity();
+            });
+
+            // --- UPDATED: Strong Password Validation Logic ---
+            passwordInput.addEventListener('input', () => {
+                const pass = passwordInput.value;
+                let strength = 0;
+
+                // 1. Check requirements
+                const hasLength = pass.length >= 8;
+                const hasLowercase = /[a-z]/.test(pass);
+                const hasUppercase = /[A-Z]/.test(pass);
+                const hasNumber = /[0-9]/.test(pass);
+                const hasSymbol = /[^a-zA-Z0-9]/.test(pass); // Special char
+
+                isPasswordValid = hasLength && hasLowercase && hasUppercase && hasNumber && hasSymbol;
+
+                let errorMessages = [];
+                if (!hasLength) errorMessages.push("at least 8 characters");
+                if (!hasLowercase) errorMessages.push("a lowercase letter");
+                if (!hasUppercase) errorMessages.push("an uppercase letter");
+                if (!hasNumber) errorMessages.push("a number");
+                if (!hasSymbol) errorMessages.push("a symbol");
+
+                if (isPasswordValid) {
+                    updateFieldState(passwordInput, passwordError, true);
+                } else {
+                    let message = "Must include: " + errorMessages.join(", ") + ".";
+                    updateFieldState(passwordInput, passwordError, false, message);
+                }
+
+                // 2. Update strength bar
+                if (hasLength) strength++;
+                if (hasLowercase && hasUppercase) strength++;
+                if (hasNumber) strength++;
+                if (hasSymbol) strength++;
+                
+                if (pass.length === 0) {
+                    strengthBar.style.width = '0%';
+                } else if (strength === 1) {
+                    strengthBar.style.width = '25%';
+                    strengthBar.style.backgroundColor = 'var(--error-red)';
+                } else if (strength === 2) {
+                    strengthBar.style.width = '50%';
+                    strengthBar.style.backgroundColor = 'var(--accent-yellow)';
+                } else if (strength === 3) {
+                    strengthBar.style.width = '75%';
+                    strengthBar.style.backgroundColor = 'var(--accent-yellow)';
+                } else { // strength is 4
+                    strengthBar.style.width = '100%';
+                    strengthBar.style.backgroundColor = 'var(--success-green)';
+                }
+
+                // Also re-validate confirm password
+                validateConfirmPassword();
+                checkFormValidity();
+            });
+            // --- End of update ---
+
+            function validateConfirmPassword() {
+                if (confirmPasswordInput.value === passwordInput.value && confirmPasswordInput.value.length > 0) {
+                    isConfirmPasswordValid = true;
+                    updateFieldState(confirmPasswordInput, confirmPasswordError, true);
+                } else {
+                    isConfirmPasswordValid = false;
+                    if (confirmPasswordInput.value.length === 0) {
+                        updateFieldState(confirmPasswordInput, confirmPasswordError, false, 'Please confirm your password.');
+                    } else {
+                        updateFieldState(confirmPasswordInput, confirmPasswordError, false, 'Passwords do not match.');
+                    }
+                }
+            }
+            confirmPasswordInput.addEventListener('input', () => {
+                validateConfirmPassword();
+                checkFormValidity();
+            });
+
+            // --- Form Submission ---
+            signupForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop actual submission for this demo
+
+                if (isNameValid && isEmailValid && isPasswordValid && isConfirmPasswordValid) {
+                    // UPDATED: Replaced alert with console.log
+                    console.log('Sign-up successful! (Demo)');
+                    // In a real app, you would send this to a server
+                    // e.g., fetch('/signup', { method: 'POST', body: new FormData(signupForm) })
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
