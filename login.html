@@ -1,24 +1,387 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login — AI Carbon Footprint Tracker</title>
-    <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In | AI in Climate Change</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+    <style>
+        :root {
+            --primary-green: #2a9d8f;
+            --dark-blue: #264653;
+            --accent-yellow: #e9c46a;
+            --light-grey: #f4f7f6;
+            --text-dark: #333;
+            --text-light: #ffffff;
+            --border-color: #ddd;
+            --error-red: #e76f51;
+            --success-green: #2a9d8f;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--light-grey);
+            color: var(--text-dark);
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .auth-container {
+            display: flex;
+            width: 100%;
+            max-width: 950px;
+            margin: 20px;
+            background: var(--text-light);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        /* --- 1. Info Section (Left) --- */
+        .info-section {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-blue));
+            color: var(--text-light);
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .info-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .info-section ul {
+            list-style: none;
+        }
+
+        .info-section ul li {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-section ul li::before {
+            content: '✔';
+            color: var(--accent-yellow);
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 12px;
+        }
+
+        /* --- 2. Form Section (Right) --- */
+        .form-section {
+            flex: 1;
+            padding: 50px 40px;
+        }
+
+        .form-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: 'Lato', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* --- Interactive Styles --- */
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary-green);
+            box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+        }
+
+        .form-group input.invalid {
+            border-color: var(--error-red);
+        }
+
+        .form-group input.valid {
+            border-color: var(--success-green);
+        }
+
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.8rem;
+            display: none;
+            /* Hidden by default */
+            margin-top: 5px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            top: 40px;
+            right: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            user-select: none;
+        }
+
+        .forgot-password {
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 20px;
+        }
+
+        .forgot-password a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+
+        .form-button {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--primary-green);
+            color: var(--text-light);
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.1s ease, opacity 0.3s ease;
+        }
+
+        .form-button:hover {
+            background-color: var(--dark-blue);
+        }
+
+        .form-button:active {
+            transform: scale(0.99);
+        }
+
+        /* Disabled button state */
+        .form-button:disabled {
+            background-color: #999;
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        .footer-links a {
+            color: var(--primary-green);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .auth-container {
+                flex-direction: column;
+                margin: 0;
+                border-radius: 0;
+            }
+
+            .info-section,
+            .form-section {
+                padding: 40px 25px;
+            }
+
+            .info-section h1 {
+                font-size: 2rem;
+            }
+
+            .form-section h2 {
+                font-size: 1.8rem;
+            }
+
+            .password-toggle {
+                top: 38px;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <main class="container auth-page">
-        <h1>Login</h1>
-        <form id="loginForm">
-            <label>Email<input type="email" id="email" required></label>
-            <label>Password<input type="password" id="password" required></label>
-            <button type="submit">Sign in</button>
-        </form>
-        <p>Don't have an account? <a href="signup.html">Sign up</a></p>
-    </main>
-    <script src="js/auth.js"></script>
+
+    <div class="auth-container">
+
+        <div class="info-section">
+            <h1>Harnessing AI to Combat Climate Change</h1>
+            <p>Join our community of innovators, researchers, and policymakers dedicated to finding sustainable
+                solutions for our planet.</p>
+            <ul>
+                <li>Access cutting-edge research</li>
+                <li>Collaborate on new projects</li>
+                <li>Network with industry experts</li>
+                <li>Be part of the solution</li>
+            </ul>
+        </div>
+
+        <div class="form-section">
+            <h2>Welcome Back!</h2>
+
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email">
+                    <span class="error-message" id="email-error">Please enter a valid email.</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password">
+                    <span class="password-toggle" id="toggle-password"><i class="fas fa-eye"></i></span>
+                    <span class="error-message" id="password-error">Password is required.</span>
+                </div>
+
+                <div class="forgot-password">
+                    <a href="#">Forgot Password?</a>
+                </div>
+
+                <button type="submit" id="login-button" class="form-button" disabled>Log In</button>
+            </form>
+
+            <div class="footer-links">
+                <p>Don't have an account? <a href="sign.html">Sign Up</a></p>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Form Element Selection ---
+            const loginForm = document.getElementById('login-form');
+            const loginButton = document.getElementById('login-button');
+
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+
+            const togglePassword = document.getElementById('toggle-password');
+
+            // --- Validation State ---
+            let isEmailValid = false;
+            let isPasswordValid = false;
+
+            // --- Helper: Toggle Password Visibility ---
+            togglePassword.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                togglePassword.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+            });
+
+            // --- Helper: Update Field State (Valid/Invalid) ---
+            function updateFieldState(inputEl, errorEl, isValid, message = '') {
+                if (isValid) {
+                    inputEl.classList.remove('invalid');
+                    inputEl.classList.add('valid');
+                    errorEl.style.display = 'none';
+                } else {
+                    inputEl.classList.remove('valid');
+                    inputEl.classList.add('invalid');
+                    errorEl.textContent = message;
+                    errorEl.style.display = 'block';
+                }
+            }
+
+            // --- Helper: Check Form Validity & Enable Button ---
+            function checkFormValidity() {
+                if (isEmailValid && isPasswordValid) {
+                    loginButton.disabled = false;
+                } else {
+                    loginButton.disabled = true;
+                }
+            }
+
+            // --- Validation Logic ---
+            emailInput.addEventListener('input', () => {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailRegex.test(emailInput.value)) {
+                    isEmailValid = true;
+                    updateFieldState(emailInput, emailError, true);
+                } else {
+                    isEmailValid = false;
+                    updateFieldState(emailInput, emailError, false, 'Please enter a valid email.');
+                }
+                checkFormValidity();
+            });
+
+            passwordInput.addEventListener('input', () => {
+                if (passwordInput.value.length > 0) {
+                    isPasswordValid = true;
+                    updateFieldState(passwordInput, passwordError, true);
+                } else {
+                    isPasswordValid = false;
+                    updateFieldState(passwordInput, passwordError, false, 'Password is required.');
+                }
+                checkFormValidity();
+            });
+
+            // --- Form Submission ---
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Stop actual submission for this demo
+
+                if (isEmailValid && isPasswordValid) {
+                    alert('Login successful! (Demo)');
+                    // In a real app, you would send this to a server
+                }
+            });
+        });
+    </script>
+
 </body>
 
 </html>
